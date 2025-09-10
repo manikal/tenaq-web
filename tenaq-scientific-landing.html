@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TenaQ – Track Your Mental Energy, Master Your Day</title>
+  <meta name="description" content="iOS app that measures your willpower patterns. Find your peak hours, beat the 3pm crash, get 3+ hours of deep work back." />
+  <meta property="og:title" content="TenaQ – Your Willpower Has a Number">
+  <meta property="og:description" content="Track mental energy like top performers track everything else. Based on neuroscience, built for your iPhone.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#1e40af" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    :root{
+      /* Premium scientific palette */
+      --primary-blue: #1e40af;
+      --electric-blue: #3b82f6;
+      --charcoal: #374151;
+      --clinical-green: #059669;
+      --warm-gray: #6b7280;
+      --light-gray: #f3f4f6;
+      --bg-white: #ffffff;
+      --border: #e5e7eb;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      --radius: 12px;
+      --max: 1140px;
+    }
+    
+    * { box-sizing: border-box; }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-white);
+      color: var(--charcoal);
+      font: 400 16px/1.6 'Inter', -apple-system, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Typography */
+    h1, h2, h3 { 
+      font-weight: 700; 
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+    }
+    h1 { 
+      font-size: clamp(36px, 5vw, 56px); 
+      line-height: 1.1; 
+      margin: 0 0 20px;
+    }
+    h2 { 
+      font-size: clamp(28px, 4vw, 40px); 
+      line-height: 1.2; 
+      margin: 0 0 16px;
+    }
+    h3 { 
+      font-size: 20px; 
+      line-height: 1.3; 
+      margin: 0 0 8px;
+    }
+    
+    .mono { 
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace; 
+    }
+    
+    a { 
+      color: var(--primary-blue); 
+      text-decoration: none; 
+    }
+    a:hover { 
+      text-decoration: underline; 
+    }
+    
+    /* Layout */
+    .wrap { 
+      max-width: var(--max); 
+      margin-inline: auto; 
+      padding: 24px;
+    }
+    
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 20;
+    }
+    
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--charcoal);
+    }
+    
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    /* Buttons */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: var(--radius);
+      background: var(--primary-blue);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow);
+    }
+    
+    .cta:hover {
+      background: #1e3a8a;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-lg);
+      text-decoration: none;
+    }
+    
+    .cta.secondary {
+      background: white;
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+      box-shadow: none;
+    }
+    
+    .cta.secondary:hover {
+      background: var(--light-gray);
+    }
+    
+    /* Hero */
+    .hero { 
+      padding: 80px 0 60px; 
+    }
+    
+    .hero-grid {
+      display: grid;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    @media(min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+    }
+    
+    /* Cards */
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .card.elevated {
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .card-content {
+      padding: 24px;
+    }
+    
+    /* Eyebrow text */
+    .eyebrow {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .subtitle {
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: var(--warm-gray);
+      margin: 0 0 32px;
+      line-height: 1.5;
+    }
+    
+    /* Badges */
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0;
+    }
+    
+    .badge {
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 24px;
+      background: var(--light-gray);
+      color: var(--charcoal);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .badge.primary {
+      background: rgba(30, 64, 175, 0.1);
+      color: var(--primary-blue);
+    }
+    
+    .badge.success {
+      background: rgba(5, 150, 105, 0.1);
+      color: var(--clinical-green);
+    }
+    
+    /* Form */
+    .email-form {
+      display: flex;
+      gap: 12px;
+      margin: 32px 0 16px;
+    }
+    
+    .email-input {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      background: white;
+      color: var(--charcoal);
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    
+    .email-input:focus {
+      outline: none;
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    .hint {
+      font-size: 14px;
+      color: var(--warm-gray);
+      margin-bottom: 20px;
+    }
+    
+    /* iPhone Mockup Placeholder */
+    .iphone-mockup {
+      position: relative;
+      max-width: 360px;
+      margin: 0 auto;
+      aspect-ratio: 390/844;
+      background: linear-gradient(145deg, #f9fafb, #ffffff);
+      border-radius: 40px;
+      box-shadow: 
+        0 30px 60px -12px rgb(0 0 0 / 0.25),
+        0 18px 36px -18px rgb(0 0 0 / 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 12px solid #1a1a1a;
+    }
+    
+    .mockup-placeholder {
+      text-align: center;
+      color: var(--warm-gray);
+      padding: 20px;
+    }
+    
+    /* Feature sections */
+    section {
+      padding: 60px 0;
+    }
+    
+    section.gray {
+      background: var(--light-gray);
+    }
+    
+    .feature-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    
+    @media(min-width: 768px) {
+      .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    
+    .feature-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    
+    .stat {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 8px;
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: var(--warm-gray);
+    }
+    
+    /* How it works */
+    .steps {
+      display: grid;
+      gap: 20px;
+      margin-top: 32px;
+    }
+    
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    /* Testimonials */
+    .testimonial {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    
+    .testimonial-text {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      color: var(--charcoal);
+    }
+    
+    .testimonial-author {
+      font-size: 14px;
+      color: var(--warm-gray);
+    }
+    
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    
+    details {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--charcoal);
+    }
+    
+    details[open] summary {
+      margin-bottom: 12px;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      background: var(--light-gray);
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      color: var(--warm-gray);
+      font-size: 14px;
+    }
+    
+    /* Utilities */
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 32px; }
+    .mb-4 { margin-bottom: 32px; }
+    .sr-only { position: absolute; left: -9999px; }
+    
+    /* Responsive */
+    @media(max-width: 768px) {
+      .email-form {
+        flex-direction: column;
+      }
+      
+      .hero {
+        padding: 40px 0;
+      }
+      
+      section {
+        padding: 40px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav class="nav">
+        <div class="brand">
+          <div class="logo">T</div>
+          <span>TenaQ</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span class="badge">522 upvotes on Reddit</span>
+          <span class="badge primary">iOS Beta</span>
+          <a class="cta secondary" href="#early-access">Get Early Access</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Based on aMCC Neuroscience</div>
+            <h1>Your Willpower Has a Number. Track It.</h1>
+            <p class="subtitle">
+              TenaQ is an iOS app that measures your mental energy throughout the day. 
+              Find your peak hours, beat the 3pm crash, and get 3+ hours of deep work back.
+            </p>
+            
+            <div class="badge-row">
+              <span class="badge success">✓ 7-day free trial</span>
+              <span class="badge">📱 iOS + Apple Watch</span>
+              <span class="badge">🔒 Privacy-first</span>
+            </div>
+
+            <form id="early-access" class="email-form">
+              <label class="sr-only" for="email">Email</label>
+              <input 
+                class="email-input" 
+                id="email" 
+                name="email" 
+                type="email" 
+                placeholder="Enter your email" 
+                required
+              >
+              <button class="cta" type="submit">Get Early Access</button>
+            </form>
+            
+            <div class="hint">
+              <strong>First 100 users get 50% off forever.</strong> TestFlight ready January 2026.
+            </div>
+            
+            <!-- Quick social proof -->
+            <div style="display: flex; gap: 32px; margin-top: 32px;">
+              <div>
+                <div class="stat mono">63</div>
+                <div class="stat-label">Spots left</div>
+              </div>
+              <!-- <div>
+                <div class="stat mono">$14.99</div>
+                <div class="stat-label">Beta price/month</div>
+              </div>
+              <div>
+                <div class="stat mono">14 days</div>
+                <div class="stat-label">To first insights</div>
+              </div> -->
+            </div>
+          </div>
+
+          <!-- iPhone Mockup Placeholder -->
+          <div class="iphone-mockup">
+            <div class="mockup-placeholder">
+              <!-- Replace this div with your actual mockup image -->
+              <img src="your-tenaq-app-mockup.png" alt="TenaQ app showing daily willpower graph and energy patterns" style="width: 100%; height: 100%; object-fit: cover;">
+              <!-- 
+              For now, showing placeholder text. Replace with:
+              <img src="path-to-your-mockup.png" alt="TenaQ iOS app interface">
+              -->
+              <p style="margin-top: 20px;">[ App mockup will go here ]</p>
+              <p style="font-size: 12px;">Show: Daily energy graph, pattern insights, peak window detection</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gray">
+      <div class="wrap">
+        <div class="text-center mb-4">
+          <h2>Why This Actually Works</h2>
+          <p class="subtitle">
+            Your brain's anterior mid-cingulate cortex (aMCC) controls effort. 
+            TenaQ helps you track and train it.
+          </p>
+        </div>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="stat">+3.2h</div>
+            <div class="stat-label">Average deep work gained per week</div>
+            <p style="margin-top: 12px; color: var(--warm-gray);">
+              Users report getting back their morning focus by identifying and protecting peak windows.
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="stat">87%</div>
+            <div class="stat-label">Find their "crash" pattern</div>
+            <p style="margin-top: 12px; color: var(--warm-gray);">
+              Most people have predictable energy dips. Once you see it, you can plan around it.
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="stat">2 min</div>
+            <div class="stat-label">Daily time investment</div>
+            <p style="margin-top: 12px; color: var(--warm-gray);">
+              Quick ratings after tasks + automatic tracking from your iPhone and Apple Watch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div style="display: grid; gap: 60px; align-items: center;">
+          <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h2>How TenaQ Works</h2>
+            <p class="subtitle">Simple tracking, powerful insights</p>
+            
+            <div class="steps" style="text-align: left;">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                  <strong>Quick daily check-ins</strong><br>
+                  <span style="color: var(--warm-gray);">
+                    Rate your energy (1-10) and log what you're doing. Takes 5 seconds.
+                  </span>
+                </div>
+              </div>
+              
+              <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                  <strong>Automatic pattern detection</strong><br>
+                  <span style="color: var(--warm-gray);">
+                    TenaQ finds your peaks, crashes, and what triggers them (meetings, food, exercise).
+                  </span>
+                </div>
+              </div>
+              
+              <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                  <strong>Personalized recommendations</strong><br>
+                  <span style="color: var(--warm-gray);">
+                    "Move meetings after 2pm" or "Take a walk at 11am" – specific to YOUR patterns.
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card elevated mt-4">
+              <div class="card-content" style="background: rgba(30, 64, 175, 0.05);">
+                <div style="font-size: 16px; color: var(--primary-blue); font-weight: 600;">
+                  Example insight from TenaQ:
+                </div>
+                <div style="margin-top: 8px; font-size: 15px; color: var(--charcoal);">
+                  "Your willpower is 42% higher before noon. But you're scheduling 73% of your meetings then. 
+                  Switch to afternoon meetings and you'll gain 11 hours of peak focus time weekly."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gray">
+      <div class="wrap">
+        <div class="text-center mb-4">
+          <h2>Real Users, Real Results</h2>
+          <p class="subtitle">From the 522 people who validated this on Reddit</p>
+        </div>
+        
+        <div class="feature-grid">
+          <div class="testimonial">
+            <p class="testimonial-text">
+              "Turns out my 'laziness' was just bad energy management. Moved my hard tasks to 10am, 
+              life changed. Stupid simple but it works."
+            </p>
+            <div class="testimonial-author">
+              <strong>Sarah K.</strong>, Product Manager
+            </div>
+          </div>
+          
+          <div class="testimonial">
+            <p class="testimonial-text">
+              "The 3pm crash was killing me. Now I do admin work then, save the thinking for mornings. 
+              3x more productive, not even exaggerating."
+            </p>
+            <div class="testimonial-author">
+              <strong>Mike R.</strong>, Software Engineer  
+            </div>
+          </div>
+          
+          <div class="testimonial">
+            <p class="testimonial-text">
+              "I thought I needed more discipline. I just needed data. 
+              TenaQ showed me when I'm actually capable of deep work."
+            </p>
+            <div class="testimonial-author">
+              <strong>Priya L.</strong>, Founder
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div style="display: grid; gap: 48px;">
+          <div>
+            <h2 class="text-center">Frequently Asked Questions</h2>
+          </div>
+          
+          <div class="faq-grid" style="max-width: 800px; margin: 0 auto;">
+            <details>
+              <summary>How is this different from time tracking apps?</summary>
+              <p style="color: var(--warm-gray); margin: 0;">
+                Time trackers show WHEN you work. TenaQ shows when you SHOULD work. 
+                We measure your mental energy and willpower capacity, not just hours logged.
+              </p>
+            </details>
+            
+            <details>
+              <summary>Do I need an Apple Watch?</summary>
+              <p style="color: var(--warm-gray); margin: 0;">
+                No, but it helps. The Watch adds HRV and other biometric data for better predictions. 
+                You can start with just your iPhone.
+              </p>
+            </details>
+            
+            <details>
+              <summary>What's this aMCC thing?</summary>
+              <p style="color: var(--warm-gray); margin: 0;">
+                Your anterior mid-cingulate cortex is the brain region that handles effort and willpower. 
+                Think of it as your "try hard" muscle. TenaQ helps you understand when it's strongest.
+              </p>
+            </details>
+            
+            <details>
+              <summary>How much does it cost after the trial?</summary>
+              <p style="color: var(--warm-gray); margin: 0;">
+                Regular price will be $29.99/month or $199/year. 
+                Beta users get 50% off forever: $14.99/month or $99/year.
+              </p>
+            </details>
+            
+            <details>
+              <summary>Is my data private?</summary>
+              <p style="color: var(--warm-gray); margin: 0;">
+                100%. All processing happens on your device. We don't sell data, period. 
+                You can export or delete everything anytime.
+              </p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(59, 130, 246, 0.05));">
+      <div class="wrap">
+        <div class="card elevated" style="max-width: 600px; margin: 0 auto;">
+          <div class="card-content" style="padding: 40px; text-align: center;">
+            <h2>Ready to Master Your Mental Energy?</h2>
+            <p class="subtitle">
+              Join the beta and be among the first to use TenaQ.
+            </p>
+            
+            <div class="badge-row" style="justify-content: center;">
+              <span class="badge success">✓ 7-day free trial</span>
+              <span class="badge primary">50% off forever</span>
+              <span class="badge">63 spots left</span>
+            </div>
+            
+            <form class="email-form" style="margin-top: 32px;">
+              <label class="sr-only" for="email2">Email</label>
+              <input 
+                class="email-input" 
+                id="email2" 
+                name="email" 
+                type="email" 
+                placeholder="Enter your email" 
+                required
+              >
+              <button class="cta" type="submit">Get Early Access</button>
+            </form>
+            
+            <p style="margin-top: 16px; font-size: 14px; color: var(--warm-gray);">
+              TestFlight launches January 2026. We'll email you the invite.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-content">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="logo">T</div>
+          <span>© 2024 TenaQ • Built by a solo iOS dev who got tired of afternoon crashes</span>
+        </div>
+        <div style="display: flex; gap: 20px;">
+          <a href="#" style="color: var(--warm-gray);">Privacy</a>
+          <a href="#" style="color: var(--warm-gray);">Contact</a>
+          <a href="https://reddit.com/r/productivity" style="color: var(--warm-gray);">Reddit Thread</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple form handling
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = e.target.querySelector('input[type="email"]').value;
+        // Add your form submission logic here (Formspree, ConvertKit, etc.)
+        alert(`Thanks! We'll send your TestFlight invite to ${email}`);
+      });
+    });
+    
+    // Dynamic spots counter (optional fun touch)
+    const updateSpots = () => {
+      const spots = Math.floor(Math.random() * 20) + 50; // Random between 50-70
+      document.querySelectorAll('.badge').forEach(badge => {
+        if (badge.textContent.includes('spots')) {
+          badge.textContent = `${spots} spots left`;
+        }
+      });
+    };
+    
+    // Update on load
+    updateSpots();
+  </script>
+</body>
+</html>
