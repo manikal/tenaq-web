@@ -114,13 +114,6 @@
       width: 36px;
       height: 36px;
       border-radius: 8px;
-      background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
     }
     
     /* Buttons */
@@ -172,7 +165,7 @@
     
     @media(min-width: 900px) {
       .hero-grid {
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: 1fr 1fr;
       }
     }
     
@@ -285,6 +278,19 @@
       align-items: center;
       justify-content: center;
       border: 12px solid #1a1a1a;
+    }
+    
+    /* Responsive Mockup Container */
+    .mockup-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .mockup-image {
+      width: 100%;
+      height: auto;
+      display: block;
     }
     
     .mockup-placeholder {
@@ -446,7 +452,17 @@
       section {
         padding: 40px 0;
       }
+      
+      .mockup-container {
+        max-width: 100%;
+        margin: 20px 0;
+      }
+      
+      .hero-grid {
+        gap: 40px;
+      }
     }
+    
   </style>
 </head>
 <body>
@@ -454,12 +470,11 @@
     <div class="wrap">
       <nav class="nav">
         <div class="brand">
-          <div class="logo">T</div>
+          <img src="appIcon.png" alt="TenaQ Logo" class="logo">
           <span>TenaQ</span>
         </div>
         <div style="display: flex; gap: 12px; align-items: center;">
-          <span class="badge">522 upvotes on Reddit</span>
-          <span class="badge primary">iOS Beta</span>
+          <a href="https://www.reddit.com/r/productivity/comments/1n1dx5v/turns_out_im_not_lazy_in_the_afternoon_im_just/" class="badge" style="color: var(--charcoal); text-decoration: none;">500+ upvotes on r/productivity</a>
           <a class="cta secondary" href="#early-access">Get Early Access</a>
         </div>
       </nav>
@@ -474,8 +489,8 @@
             <div class="eyebrow">Based on aMCC Neuroscience</div>
             <h1>Your Willpower Has a Number. Track It.</h1>
             <p class="subtitle">
-              TenaQ is an iOS app that measures your mental energy throughout the day. 
-              Find your peak hours, beat the 3pm crash, and get 3+ hours of deep work back.
+              Stop fighting your energy. Start tracking it.<br>
+              Find your peak hours, avoid the 3pm crash, and reclaim 3+ hours of deep work daily.
             </p>
             
             <div class="badge-row">
@@ -484,12 +499,13 @@
               <span class="badge">🔒 Privacy-first</span>
             </div>
 
-            <form id="early-access" class="email-form">
+            <form id="early-access" action="https://landing.mailerlite.com/webforms/submit/164378830863075285" method="POST" class="email-form">
+              <input type="hidden" name="ml-submit" value="1">
               <label class="sr-only" for="email">Email</label>
               <input 
                 class="email-input" 
                 id="email" 
-                name="email" 
+                name="fields[email]" 
                 type="email" 
                 placeholder="Enter your email" 
                 required
@@ -519,7 +535,9 @@
           </div>
 
           <!-- iPhone Mockup Placeholder -->
-                         <img src="mockup.jpg" alt="TenaQ app showing daily willpower graph and energy patterns" style="width: 150%; height: 100%; object-fit: cover;">
+          <div class="mockup-container">
+            <img src="mockup.png" alt="TenaQ app showing daily willpower graph and energy patterns" class="mockup-image">
+          </div>
 
         </div>
       </div>
@@ -685,12 +703,13 @@
               <span class="badge">63 spots left</span>
             </div>
             
-            <form class="email-form" style="margin-top: 32px;">
+            <form action="https://landing.mailerlite.com/webforms/submit/164378830863075285" method="POST" class="email-form" style="margin-top: 32px;">
+              <input type="hidden" name="ml-submit" value="1">
               <label class="sr-only" for="email2">Email</label>
               <input 
                 class="email-input" 
                 id="email2" 
-                name="email" 
+                name="fields[email]" 
                 type="email" 
                 placeholder="Enter your email" 
                 required
@@ -711,28 +730,18 @@
     <div class="wrap">
       <div class="footer-content">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="logo">T</div>
+          <img src="appIcon.png" alt="TenaQ Logo" class="logo">
           <span>© 2025 TenaQ • Built by a solo iOS dev who got tired of afternoon crashes</span>
         </div>
         <div style="display: flex; gap: 20px;">
           <a href="#" style="color: var(--warm-gray);">Privacy</a>
-          <a href="#" style="color: var(--warm-gray);">Contact</a>
+          <a href="mailto:info@tenaq.app" style="color: var(--warm-gray);">Contact</a>
         </div>
       </div>
     </div>
   </footer>
 
   <script>
-    // Simple form handling
-    document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = e.target.querySelector('input[type="email"]').value;
-        // Add your form submission logic here (Formspree, ConvertKit, etc.)
-        alert(`Thanks! We'll send your TestFlight invite to ${email}`);
-      });
-    });
-    
     // Dynamic spots counter (optional fun touch)
     const updateSpots = () => {
       const spots = Math.floor(Math.random() * 20) + 50; // Random between 50-70
