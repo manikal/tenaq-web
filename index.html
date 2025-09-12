@@ -889,22 +889,45 @@
         e.preventDefault();
         
         const formData = new FormData(this);
+        const email = formData.get('fields[email]');
         
-        // Submit to MailerLite
-        fetch(this.action, {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors' // Important for cross-origin MailerLite submission
-        }).then(() => {
-          // Show success modal after submission
+        // Create hidden iframe for form submission
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.name = 'mailerlite-frame';
+        document.body.appendChild(iframe);
+        
+        // Create temporary form for submission
+        const tempForm = document.createElement('form');
+        tempForm.method = 'POST';
+        tempForm.action = this.action;
+        tempForm.target = 'mailerlite-frame';
+        tempForm.style.display = 'none';
+        
+        // Add form fields
+        const emailInput = document.createElement('input');
+        emailInput.name = 'fields[email]';
+        emailInput.value = email;
+        tempForm.appendChild(emailInput);
+        
+        const submitField = document.createElement('input');
+        submitField.name = 'ml-submit';
+        submitField.value = '1';
+        tempForm.appendChild(submitField);
+        
+        // Submit form
+        document.body.appendChild(tempForm);
+        tempForm.submit();
+        
+        // Show modal and cleanup
+        setTimeout(() => {
           showModal();
-          // Reset form
-          this.reset();
-        }).catch(() => {
-          // Show modal even if there's an error (MailerLite still receives the data)
-          showModal();
-          this.reset();
-        });
+          document.body.removeChild(tempForm);
+          document.body.removeChild(iframe);
+        }, 1000);
+        
+        // Reset original form
+        this.reset();
       });
     });
     
