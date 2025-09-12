@@ -595,12 +595,11 @@
             </p>
             
             <div class="badge-row">
-              <!--<span class="badge success">✓ 7-day free trial</span>-->
               <span class="badge">📱 iOS + Apple Watch</span>
               <span class="badge">🔒 Privacy-first</span>
             </div>
 
-            <form id="early-access" action="https://app.mailerlite.com/webforms/submit/165370508998608758" method="POST" class="email-form">
+            <form id="early-access" action="https://assets.mailerlite.com/jsonp/1772271/forms/165370508998608758/subscribe" method="POST" class="email-form">
               <label class="sr-only" for="email">Email</label>
               <input 
                 class="email-input" 
@@ -610,6 +609,8 @@
                 placeholder="Enter your email" 
                 required
               >
+              <input type="hidden" name="ml-submit" value="1">
+              <input type="hidden" name="anticsrf" value="true">
               <button class="cta" type="submit">Get Early Access</button>
             </form>
             
@@ -623,14 +624,6 @@
                 <div class="stat mono">63</div>
                 <div class="stat-label">Spots left</div>
               </div>
-              <!-- <div>
-                <div class="stat mono">$14.99</div>
-                <div class="stat-label">Beta price/month</div>
-              </div>
-              <div>
-                <div class="stat mono">14 days</div>
-                <div class="stat-label">To first insights</div>
-              </div> -->
             </div>
           </div>
 
@@ -803,7 +796,7 @@
               <span class="badge">63 spots left</span>
             </div>
             
-            <form action="https://app.mailerlite.com/webforms/submit/165370508998608758" method="POST" class="email-form" style="margin-top: 32px;">
+            <form action="https://assets.mailerlite.com/jsonp/1772271/forms/165370508998608758/subscribe" method="POST" class="email-form" style="margin-top: 32px;">
               <label class="sr-only" for="email2">Email</label>
               <input 
                 class="email-input" 
@@ -813,6 +806,8 @@
                 placeholder="Enter your email" 
                 required
               >
+              <input type="hidden" name="ml-submit" value="1">
+              <input type="hidden" name="anticsrf" value="true">
               <button class="cta" type="submit">Get Early Access</button>
             </form>
             
@@ -881,7 +876,7 @@
       document.body.style.overflow = ''; // Restore scroll
     }
     
-    // Form submission handling with hidden iframe
+    // Form submission handling
     document.querySelectorAll('form').forEach(form => {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -889,38 +884,21 @@
         const formData = new FormData(this);
         const email = formData.get('fields[email]');
         
-        // Create hidden iframe for form submission
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.name = 'mailerlite-frame';
-        document.body.appendChild(iframe);
-        
-        // Create temporary form for submission
-        const tempForm = document.createElement('form');
-        tempForm.method = 'POST';
-        tempForm.action = this.action;
-        tempForm.target = 'mailerlite-frame';
-        tempForm.style.display = 'none';
-        
-        // Add form fields
-        const emailInput = document.createElement('input');
-        emailInput.name = 'fields[email]';
-        emailInput.value = email;
-        tempForm.appendChild(emailInput);
-        
-        // Submit form
-        document.body.appendChild(tempForm);
-        tempForm.submit();
-        
-        // Show modal and cleanup
-        setTimeout(() => {
+        // Submit to MailerLite using fetch
+        fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // MailerLite doesn't support CORS, so we use no-cors
+        }).then(() => {
+          // Show success modal regardless of response (due to no-cors)
           showModal();
-          document.body.removeChild(tempForm);
-          document.body.removeChild(iframe);
-        }, 1000);
-        
-        // Reset original form
-        this.reset();
+          this.reset();
+        }).catch((error) => {
+          console.log('Form submitted (no-cors mode)', error);
+          // Still show success modal as submission likely worked
+          showModal();
+          this.reset();
+        });
       });
     });
     
