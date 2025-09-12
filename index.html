@@ -433,6 +433,107 @@
       font-size: 14px;
     }
     
+    /* Success Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    
+    .modal-overlay.show .modal-content {
+      transform: scale(1);
+    }
+    
+    .modal-content h2 {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin: 0 0 20px;
+    }
+    
+    .modal-subtitle {
+      font-size: 20px;
+      color: var(--warm-gray);
+      margin: 0 0 32px;
+      line-height: 1.5;
+    }
+    
+    .modal-timeline h3 {
+      font-size: 18px;
+      color: var(--charcoal);
+      margin: 0 0 16px;
+      text-align: left;
+    }
+    
+    .modal-timeline ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      text-align: left;
+    }
+    
+    .modal-timeline li {
+      padding: 8px 0;
+      color: var(--warm-gray);
+      font-size: 16px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .modal-timeline li:before {
+      content: "•";
+      color: var(--primary-blue);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    
+    .modal-close-btn {
+      background: #4ade80;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 120px;
+    }
+    
+    .modal-close-btn:hover {
+      background: #22c55e;
+      transform: translateY(-1px);
+    }
+
     /* Utilities */
     .text-center { text-align: center; }
     .mt-4 { margin-top: 32px; }
@@ -726,6 +827,25 @@
     </section>
   </main>
 
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>You're in! 🧠</h2>
+      <p class="modal-subtitle">You'll be among the first to know when <strong>TenaQ</strong> launches in January 2026.</p>
+      
+      <div class="modal-timeline">
+        <h3>What happens next:</h3>
+        <ul>
+          <li>Week of Jan 6: Beta invites go out</li>
+          <li>Jan 13: You get your first energy pattern report</li>
+          <li>Jan 20: Lifetime pricing ($49) ends</li>
+        </ul>
+      </div>
+      
+      <button class="modal-close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
   <footer>
     <div class="wrap">
       <div class="footer-content">
@@ -751,6 +871,56 @@
         }
       });
     };
+    
+    // Modal functions
+    function showModal() {
+      document.getElementById('success-modal').classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    }
+    
+    function closeModal() {
+      document.getElementById('success-modal').classList.remove('show');
+      document.body.style.overflow = ''; // Restore scroll
+    }
+    
+    // Form submission handling
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        // Submit to MailerLite
+        fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // Important for cross-origin MailerLite submission
+        }).then(() => {
+          // Show success modal after submission
+          showModal();
+          // Reset form
+          this.reset();
+        }).catch(() => {
+          // Show modal even if there's an error (MailerLite still receives the data)
+          showModal();
+          this.reset();
+        });
+      });
+    });
+    
+    // Close modal on overlay click
+    document.getElementById('success-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
     
     // Update on load
     updateSpots();
