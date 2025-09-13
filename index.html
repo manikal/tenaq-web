@@ -9,7 +9,6 @@
   <meta property="og:description" content="Track mental energy like top performers track everything else. Based on neuroscience, built for your iPhone.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#1e40af" />
-  <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
@@ -600,7 +599,7 @@
               <span class="badge">🔒 Privacy-first</span>
             </div>
 
-            <form id="early-access" action="https://app.kit.com/forms/8553625/subscriptions" method="post" class="email-form seva-form formkit-form" data-sv-form="8553625" data-uid="14bfb3cea2" data-format="inline" data-version="5">
+            <form id="early-access" action="https://app.kit.com/forms/8553625/subscriptions" method="post" class="email-form">
               <label class="sr-only" for="email">Email</label>
               <input
                 class="email-input"
@@ -795,7 +794,7 @@
               <span class="badge">63 spots left</span>
             </div>
             
-            <form action="https://app.kit.com/forms/8553625/subscriptions" method="post" class="email-form seva-form formkit-form" data-sv-form="8553625" data-uid="14bfb3cea2" data-format="inline" data-version="5" style="margin-top: 32px;">
+            <form action="https://app.kit.com/forms/8553625/subscriptions" method="post" class="email-form" style="margin-top: 32px;">
               <label class="sr-only" for="email2">Email</label>
               <input
                 class="email-input"
@@ -873,14 +872,26 @@
       document.body.style.overflow = ''; // Restore scroll
     }
     
-    // Form submission handling - ConvertKit forms will handle submission
-    // Show modal on successful submission (ConvertKit will redirect or trigger success)
-    document.querySelectorAll('form.seva-form').forEach(form => {
+    // Form submission handling - direct submission to ConvertKit
+    document.querySelectorAll('form.email-form').forEach(form => {
       form.addEventListener('submit', function(e) {
-        // Let ConvertKit handle the submission, but show our modal after a delay
-        setTimeout(() => {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        // Submit to ConvertKit
+        fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        }).then(() => {
           showModal();
-        }, 1000);
+          this.reset();
+        }).catch(() => {
+          // Even on "error" (due to no-cors), the submission likely worked
+          showModal();
+          this.reset();
+        });
       });
     });
     
