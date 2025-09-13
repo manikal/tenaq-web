@@ -604,37 +604,19 @@
       }
 
       .nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding: 12px 0;
-      }
-
-      .nav div:last-child {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-        width: 100%;
         justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
       }
 
-      .nav .badge {
-        font-size: 11px;
-        padding: 4px 8px;
-        flex: 1;
-        text-align: center;
-        min-width: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      .nav div:last-child .badge {
+        display: none;
       }
 
       .nav .cta {
-        padding: 8px 16px;
-        font-size: 13px;
-        white-space: nowrap;
-        flex-shrink: 0;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 600;
       }
     }
 
