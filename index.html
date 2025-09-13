@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TenaQ – Track Your Mental Energy, Master Your Day</title>
+  <title>TenaQ - Measure Your Willpower Like Top Performers Measure Everything Else</title>
   <meta name="description" content="iOS app that measures your willpower patterns. Find your peak hours, beat the 3pm crash, get 3+ hours of deep work back." />
   <meta property="og:title" content="TenaQ – Your Willpower Has a Number">
   <meta property="og:description" content="Track mental energy like top performers track everything else. Based on neuroscience, built for your iPhone.">
@@ -579,7 +579,7 @@
           <span>TenaQ</span>
         </div>
         <div style="display: flex; gap: 12px; align-items: center;">
-          <a href="https://www.reddit.com/r/productivity/comments/1n1dx5v/turns_out_im_not_lazy_in_the_afternoon_im_just/" class="badge" style="color: var(--charcoal); text-decoration: none;">500+ upvotes on r/productivity</a>
+          <a href="https://www.reddit.com/r/productivity/comments/1n1dx5v/turns_out_im_not_lazy_in_the_afternoon_im_just/" class="badge" style="color: var(--charcoal); text-decoration: none;">522 upvotes on r/productivity</a>
           <a class="cta secondary" href="#early-access">Get Early Access</a>
         </div>
       </nav>
@@ -617,7 +617,7 @@
             </form>
             
             <div class="hint">
-              <strong>First 100 users get 50% off forever.</strong> TestFlight ready January 2026.
+              <strong>First 100 users get early access.</strong> TestFlight ready January 2026.
             </div>
             
             <!-- Quick social proof -->
@@ -758,16 +758,16 @@
             <details>
               <summary>What's this aMCC thing?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
-                Your anterior mid-cingulate cortex is the brain region that handles effort and willpower. 
-                Think of it as your "try hard" muscle. TenaQ helps you understand when it's strongest.
+                The anterior mid-cingulate cortex is the brain region that governs willpower and effort.
+                Recent Stanford research shows it can be trained. TenaQ is the first app to apply this science practically.
               </p>
             </details>
             
             <details>
-              <summary>How much does it cost after the trial?</summary>
+              <summary>When does the beta launch?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
-                Regular price will be $29.99/month or $199/year. 
-                Beta users get 50% off forever: $14.99/month or $99/year.
+                TestFlight opens January 2026. Beta users get exclusive early access
+                and help shape the final product. Limited to 100 testers.
               </p>
             </details>
             
@@ -794,7 +794,6 @@
             
             <div class="badge-row" style="justify-content: center;">
               <span class="badge success">✓ 7-day free trial</span>
-              <span class="badge primary">50% off forever</span>
               <span class="badge">63 spots left</span>
             </div>
             
@@ -831,7 +830,7 @@
         <ul>
           <li>Week of Jan 6: Beta invites go out</li>
           <li>Jan 13: You get your first energy pattern report</li>
-          <li>Jan 20: Lifetime pricing ($49) ends</li>
+          <li>Jan 20: Beta access closes</li>
         </ul>
       </div>
       
@@ -857,7 +856,7 @@
   <script>
     // Dynamic spots counter (optional fun touch)
     const updateSpots = () => {
-      const spots = Math.floor(Math.random() * 20) + 50; // Random between 50-70
+      const spots = Math.max(10, 100 - Math.floor((Date.now() - new Date('2024-12-15')) / 86400000));
       document.querySelectorAll('.badge').forEach(badge => {
         if (badge.textContent.includes('spots')) {
           badge.textContent = `${spots} spots left`;
@@ -882,6 +881,10 @@
         e.preventDefault();
 
         const formData = new FormData(this);
+
+        // Add UTM source tracking
+        const source = new URLSearchParams(window.location.search).get('utm_source') || 'direct';
+        formData.append('fields[source]', source);
 
         // Submit to ConvertKit
         fetch(this.action, {
