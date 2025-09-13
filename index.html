@@ -9,6 +9,10 @@
   <meta property="og:description" content="Track mental energy like top performers track everything else. Based on neuroscience, built for your iPhone.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#1e40af" />
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
@@ -885,10 +889,17 @@
           body: formData,
           mode: 'no-cors'
         }).then(() => {
+          // Track successful email signup
+          if (window.va) {
+            window.va('track', 'Email Signup', { location: this.id || 'form' });
+          }
           showModal();
           this.reset();
         }).catch(() => {
           // Even on "error" (due to no-cors), the submission likely worked
+          if (window.va) {
+            window.va('track', 'Email Signup', { location: this.id || 'form' });
+          }
           showModal();
           this.reset();
         });
