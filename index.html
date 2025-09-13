@@ -401,23 +401,59 @@
       gap: 16px;
       margin-top: 32px;
     }
-    
+
     details {
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
-    
+
     summary {
       cursor: pointer;
       font-weight: 600;
       font-size: 16px;
       color: var(--charcoal);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--warm-gray);
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
     details[open] summary {
       margin-bottom: 12px;
+    }
+
+    details p {
+      margin: 0;
+      padding-top: 0;
+      opacity: 0;
+      max-height: 0;
+      transition: opacity 0.3s ease, max-height 0.3s ease, padding-top 0.3s ease;
+    }
+
+    details[open] p {
+      opacity: 1;
+      max-height: 200px;
+      padding-top: 4px;
     }
     
     /* Footer */
