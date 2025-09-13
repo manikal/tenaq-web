@@ -687,7 +687,7 @@
               <span class="badge">🔒 Privacy-first</span>
             </div>
 
-            <form id="early-access" action="https://app.convertkit.com/forms/8553625/subscriptions" method="post" class="email-form" data-sv-form="8553625" data-uid="14bfb3cea2">
+            <form id="hero-form" action="https://app.convertkit.com/forms/8553625/subscriptions" method="post" class="email-form" data-sv-form="8553625" data-uid="14bfb3cea2">
               <label class="sr-only" for="email">Email</label>
               <input
                 class="email-input"
@@ -705,11 +705,8 @@
             </div>
             
             <!-- Quick social proof -->
-            <div style="display: flex; gap: 32px; margin-top: 32px;">
-              <div>
-                <div class="stat mono">63</div>
-                <div class="stat-label">Spots left</div>
-              </div>
+            <div style="margin-top: 32px;">
+              <div class="badge primary">Limited beta access</div>
             </div>
           </div>
 
@@ -805,8 +802,7 @@
                   Example insight from TenaQ:
                 </div>
                 <div style="margin-top: 8px; font-size: 15px; color: var(--charcoal);">
-                  "Your willpower is 42% higher before noon. But you're scheduling 73% of your meetings then. 
-                  Switch to afternoon meetings and you'll gain 11 hours of peak focus time weekly."
+                  "TenaQ will show you when your energy peaks and what drains it"
                 </div>
               </div>
             </div>
@@ -877,11 +873,10 @@
             </p>
             
             <div class="badge-row" style="justify-content: center;">
-              <span class="badge success">✓ 7-day free trial</span>
-              <span class="badge">63 spots left</span>
+              <span class="badge success">Limited beta access</span>
             </div>
             
-            <form action="https://app.convertkit.com/forms/8553625/subscriptions" method="post" class="email-form" data-sv-form="8553625" data-uid="14bfb3cea2" style="margin-top: 32px;">
+            <form id="footer-form" action="https://app.convertkit.com/forms/8553625/subscriptions" method="post" class="email-form" data-sv-form="8553625" data-uid="14bfb3cea2" style="margin-top: 32px;">
               <label class="sr-only" for="email2">Email</label>
               <input
                 class="email-input"
@@ -938,15 +933,6 @@
   </footer>
 
   <script>
-    // Dynamic spots counter (optional fun touch)
-    const updateSpots = () => {
-      const spots = Math.max(10, 100 - Math.floor((Date.now() - new Date('2024-12-15')) / 86400000));
-      document.querySelectorAll('.badge').forEach(badge => {
-        if (badge.textContent.includes('spots')) {
-          badge.textContent = `${spots} spots left`;
-        }
-      });
-    };
     
     // Modal functions
     function showModal() {
@@ -1006,9 +992,6 @@
         closeModal();
       }
     });
-    
-    // Update on load
-    updateSpots();
   </script>
 </body>
 </html>
