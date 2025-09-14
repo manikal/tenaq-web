@@ -790,6 +790,30 @@
         padding: 6px 12px;
         font-size: 12px;
       }
+
+      /* Mobile hero optimizations */
+      .hero {
+        padding: 24px 0;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+
+      .hero .subtitle {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .badge-row {
+        margin: 16px 0;
+      }
+
+      .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
     }
 
   </style>
@@ -816,15 +840,23 @@
         <div class="hero-grid">
           <div>
             <div class="eyebrow">Based on aMCC Neuroscience</div>
-            <h1>Your Willpower Has a Number. Track It.</h1>
+            <h1>Willpower Measurement App</h1>
             <p class="subtitle">
-              Stop fighting your energy. Start tracking it.<br><br>
-              Find your peak hours, avoid the 3pm crash, and reclaim 3+ hours of deep work daily.
+              Track daily energy levels and log what gets accomplished. The algorithm reveals exactly when willpower peaks so hard tasks can be scheduled at optimal times.
             </p>
+
+            <div class="badge-row" style="margin-bottom: 16px;">
+              <span class="badge primary">📊 Find energy patterns</span>
+              <span class="badge primary">⏰ Beat 3pm crashes</span>
+            </div>
             
             <div class="badge-row">
               <span class="badge">📱 iOS + Apple Watch</span>
               <span class="badge">🔒 Privacy-first</span>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+              <a href="#how-it-works" class="cta secondary" style="text-decoration: none; margin-right: 16px;" onclick="scrollToHowItWorks(event)">How It Works</a>
             </div>
 
             <form id="hero-form" action="https://app.convertkit.com/forms/8553625/subscriptions" method="post" class="email-form" data-sv-form="8553625" data-uid="14bfb3cea2">
@@ -859,7 +891,7 @@
       </div>
     </section>
 
-        <section>
+        <section id="how-it-works">
       <div class="wrap">
         <div style="display: grid; gap: 60px; align-items: center;">
           <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
@@ -871,7 +903,7 @@
                 <div class="step-icon">📱</div>
                 <h3 class="step-title">Quick Check-ins</h3>
                 <p class="step-description">
-                  Rate your energy (1-10) and log what you're doing. Takes 5 seconds.
+                  Rate energy levels (1-10) and log current activities. Takes 5 seconds.
                 </p>
               </div>
 
@@ -881,7 +913,7 @@
                 <div class="step-icon">🧠</div>
                 <h3 class="step-title">Pattern Detection</h3>
                 <p class="step-description">
-                  TenaQ finds your peaks, crashes, and what triggers them (meetings, food, exercise).
+                  TenaQ finds energy peaks, crashes, and their triggers (meetings, food, exercise).
                 </p>
               </div>
 
@@ -904,7 +936,7 @@
               <div class="example-card">
                 <div class="example-label">Example TenaQ insight:</div>
                 <div class="example-text">
-                  "TenaQ will show you when your energy peaks and what drains it"
+                  "TenaQ reveals when energy peaks and what causes crashes"
                 </div>
               </div>
             </div>
@@ -918,8 +950,8 @@
         <div class="text-center mb-4">
           <h2>Why This Actually Works</h2>
           <p class="subtitle">
-            Your brain's anterior mid-cingulate cortex (aMCC) controls effort. 
-            TenaQ helps you track and train it.
+            The brain's anterior mid-cingulate cortex (aMCC) controls effort.
+            TenaQ helps track and train this critical region.
           </p>
         </div>
         
@@ -928,7 +960,7 @@
             <div class="stat">3pm</div>
             <div class="stat-label">Most common crash time</div>
             <p style="margin-top: 12px; color: var(--warm-gray);">
-              Research shows most knowledge workers hit an energy dip mid-afternoon. TenaQ helps you map yours.
+              Research shows most knowledge workers hit an energy dip mid-afternoon. TenaQ helps map individual patterns.
             </p>
           </div>
           
@@ -936,7 +968,7 @@
             <div class="stat">7 days</div>
             <div class="stat-label">To identify your pattern</div>
             <p style="margin-top: 12px; color: var(--warm-gray);">
-              Just one week of tracking reveals your unique energy cycle and optimal work windows.
+              Just one week of tracking reveals individual energy cycles and optimal work windows.
             </p>
           </div>
           
@@ -944,7 +976,7 @@
             <div class="stat">2 min</div>
             <div class="stat-label">Daily time investment</div>
             <p style="margin-top: 12px; color: var(--warm-gray);">
-              Quick ratings after tasks + automatic tracking from your iPhone and Apple Watch.
+              Quick ratings after tasks + automatic tracking from iPhone and Apple Watch.
             </p>
           </div>
         </div>
@@ -971,7 +1003,7 @@
               <summary>Do I need an Apple Watch?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
                 No, but it helps. The Watch adds HRV and other biometric data for better predictions. 
-                You can start with just your iPhone.
+                The iPhone alone provides full functionality.
               </p>
             </details>
             
@@ -987,15 +1019,15 @@
               <summary>When does the beta launch?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
                 TestFlight opens January 2026. Beta users get exclusive early access
-                and help shape the final product. Limited to 100 testers.
+                and help shape the final product. Limited to 100 beta testers.
               </p>
             </details>
             
             <details>
               <summary>Is my data private?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
-                100%. All processing happens on your device. We don't sell data, period. 
-                You can export or delete everything anytime.
+                100%. All processing happens on the device. No data selling, period.
+                Export or delete everything anytime.
               </p>
             </details>
           </div>
@@ -1009,7 +1041,7 @@
           <div class="card-content" style="padding: 40px; text-align: center;">
             <h2>Ready to Master Your Mental Energy?</h2>
             <p class="subtitle">
-              Join the beta and be among the first to use TenaQ.
+              Join the beta and be among the first to experience TenaQ.
             </p>
             
             <div class="badge-row" style="justify-content: center;">
@@ -1132,6 +1164,16 @@
         closeModal();
       }
     });
+
+    // Smooth scroll to How It Works section
+    function scrollToHowItWorks(event) {
+      event.preventDefault();
+      const section = document.getElementById('how-it-works');
+      section.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   </script>
   <script src="tenaq-score.js" defer></script>
 </body>
