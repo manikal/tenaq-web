@@ -146,10 +146,10 @@
     }
     
     /* Layout */
-    .wrap { 
-      max-width: var(--max); 
-      margin-inline: auto; 
-      padding: 24px;
+    .wrap {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: 8px;
     }
     
     /* Header */
@@ -167,7 +167,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 16px 0;
+      padding: 0;
     }
     
     .brand {
@@ -738,6 +738,10 @@
         padding: 40px 0;
       }
 
+      #how-it-works {
+        padding-top: 20px;
+      }
+
       .mockup-container {
         max-width: 100%;
         margin: 20px 0;
@@ -767,7 +771,7 @@
     /* Extra small screens (phones) */
     @media(max-width: 480px) {
       .wrap {
-        padding: 16px;
+        padding: 8px;
       }
 
       .nav {
@@ -832,7 +836,7 @@
         </div>
         <div style="display: flex; gap: 12px; align-items: center;">
           <a href="https://www.reddit.com/r/productivity/comments/1n1dx5v/turns_out_im_not_lazy_in_the_afternoon_im_just/" class="badge" style="color: var(--charcoal); text-decoration: none;">525 upvotes on r/productivity</a>
-          <a class="cta" href="#early-access">Get Early Access</a>
+          <a class="cta" href="#how-it-works" onclick="scrollToHowItWorks(event)" style="background: #f97316 !important; color: white !important; padding: 14px 24px !important; font-size: 16px !important; font-weight: 600 !important; box-shadow: var(--shadow) !important; height: auto !important; line-height: 1 !important;">How It Works</a>
         </div>
       </nav>
     </div>
@@ -844,9 +848,10 @@
         <div class="hero-grid">
           <div>
             <div class="eyebrow">Based on aMCC Neuroscience</div>
-            <h1>Willpower Measurement App</h1>
+            <h1>Find energy patterns</h1>
             <p class="subtitle">
-              Track daily energy levels and log what you accomplished. The algorithm reveals exactly when willpower peaks so hard tasks can be scheduled at optimal times.
+              Stop fighting your energy. Start tracking it.<br><br>
+              Find your peak hours, avoid the 3pm crash, and reclaim 3+ hours of deep work daily.
             </p>
 
             <div class="badge-row" style="margin-bottom: 16px;">
@@ -854,16 +859,10 @@
               <span class="badge primary">⏰ Beat 3pm crashes</span>
             </div>
             
-            <div class="badge-row">
-              <span class="badge">📱 iOS + Apple Watch</span>
-              <span class="badge">🔒 Privacy-first</span>
-            </div>
 
-            <div style="margin-bottom: 24px;">
-              <a href="#how-it-works" class="cta secondary" style="text-decoration: none; margin-right: 16px;" onclick="scrollToHowItWorks(event)">How It Works</a>
-            </div>
 
-            <form id="hero-form" action="https://app.convertkit.com/forms/8553625/subscriptions" method="post" class="email-form" data-sv-form="8553625" data-uid="14bfb3cea2">
+            <!-- Integrated email form with scarcity messaging -->
+            <form id="hero-form" action="https://app.convertkit.com/forms/8553625/subscriptions" method="post" data-sv-form="8553625" data-uid="14bfb3cea2" style="margin-top: 20px;">
               <label class="sr-only" for="email">Email</label>
               <input
                 class="email-input"
@@ -872,23 +871,30 @@
                 type="email"
                 placeholder="Enter your email"
                 required
+                style="width: 100%; margin-bottom: 12px;"
               >
-              <button class="cta" type="submit">Get Early Access</button>
+              <button class="cta" type="submit" style="width: 100%; text-align: center; margin-bottom: 16px;">Get Limited beta access</button>
+
+              <div style="text-align: center;">
+                <div style="font-size: 16px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px;">
+                  First <strong>100 users</strong> get early access
+                </div>
+                <div style="font-size: 14px; color: var(--warm-gray);">
+                  *Beta access via TestFlight - Early November 2025
+                </div>
+              </div>
             </form>
-            
-            <div class="hint">
-              <strong>First 100 users get early access.</strong> TestFlight ready January 2026.
-            </div>
-            
-            <!-- Quick social proof -->
-            <div style="margin-top: 32px;">
-              <div class="badge success">Limited beta access</div>
-            </div>
           </div>
 
           <!-- iPhone Mockup Placeholder -->
           <div class="mockup-container">
             <img src="mockup.png" alt="TenaQ app showing daily willpower graph and energy patterns" class="mockup-image">
+
+            <!-- Badges below mockup -->
+            <div class="badge-row" style="justify-content: center; margin-top: 24px;">
+              <span class="badge">📱 iOS + Apple Watch</span>
+              <span class="badge">🔒 Privacy-first</span>
+            </div>
           </div>
 
         </div>
@@ -936,13 +942,8 @@
               <img src="tenaq-infographic.svg" alt="TenaQ How It Works Infographic" style="max-width: 100%; height: auto;" />
             </div>
 
-            <div class="steps-example">
-              <div class="example-card">
-                <div class="example-label">Example TenaQ insight:</div>
-                <div class="example-text">
-                  "Your 'low energy' mornings (rated 4/10) actually produce your best work. Stop waiting to 'feel ready' - your brain lies to you."
-                </div>
-              </div>
+            <div style="text-align: center; margin-top: 48px;">
+              <img src="notification.png" alt="TenaQ insight notification example" style="max-width: 80%; height: auto;" />
             </div>
           </div>
         </div>
@@ -1045,7 +1046,7 @@
           <div class="card-content" style="padding: 40px; text-align: center;">
             <h2>Ready to Master Your Mental Energy?</h2>
             <p class="subtitle">
-              Join the beta and be among the first to experience TenaQ.
+              Join the beta and be among the first to experience <strong>TenaQ</strong>.
             </p>
             
             <div class="badge-row" style="justify-content: center;">
@@ -1066,7 +1067,7 @@
             </form>
             
             <p style="margin-top: 16px; font-size: 14px; color: var(--warm-gray);">
-              TestFlight launches January 2026. We'll email you the invite.
+              TestFlight launches Early November 2025. We'll email you the invite.
             </p>
           </div>
         </div>
@@ -1075,23 +1076,25 @@
   </main>
 
   <!-- Success Modal -->
-  <div id="success-modal" class="modal-overlay">
-    <div class="modal-content">
-      <h2>You're in! 🧠</h2>
-      <p class="modal-subtitle">You'll be among the first to know when <strong>TenaQ</strong> launches in January 2026.</p>
-      
-      <div class="modal-timeline">
-        <h3>What happens next:</h3>
-        <ul>
-          <li>Week of Jan 6: Beta invites go out</li>
-          <li>Jan 13: You get your first energy pattern report</li>
-          <li>Jan 20: Beta access closes</li>
-        </ul>
-      </div>
-      
-      <button class="modal-close-btn" onclick="closeModal()">Close</button>
+<div id="success-modal" class="modal-overlay">
+  <div class="modal-content">
+    <h2>You're in! 🧠</h2>
+    <p class="modal-subtitle">You'll be among the <strong>first 100 users</strong> to access <strong>TenaQ</strong> when TestFlight opens.</p>
+    
+    <div class="modal-timeline">
+      <h3>What happens next:</h3>
+      <ul>
+        <li><strong>November 2025:</strong> TestFlight beta invites (limited spots)</li>
+        <li><strong>Week 1:</strong> Your first willpower pattern insights</li>
+        <li><strong>Beta exclusive:</strong> Help shape the final product</li>
+      </ul>
     </div>
+    
+    <p class="modal-footer">We'll send you progress updates and behind-the-scenes development insights while you wait.</p>
+    
+    <button class="modal-close-btn" onclick="closeModal()">Got it!</button>
   </div>
+</div>
 
   <footer>
     <div class="wrap">
