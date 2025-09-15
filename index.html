@@ -9,7 +9,7 @@
   <meta property="og:description" content="iOS app that reveals when your energy peaks and crashes. Schedule hard tasks at optimal times, beat the 3pm slump, reclaim 3+ hours of focused work daily.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#1e40af" />
-  <meta name="keywords" content="afternoon energy crash, 3pm slump solution, peak performance hours, mental stamina training, willpower measurement, daily energy tracking, focus patterns, burnout prevention, iOS app, energy patterns" />
+  <meta name="keywords" content="afternoon energy crash, 3pm slump solution, peak performance hours, mental stamina training, energy pattern measurement, daily energy tracking, focus patterns, burnout prevention, iOS app, energy patterns" />
   <meta name="author" content="Mijo Kaliger" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://tenaq.app" />
@@ -65,17 +65,10 @@
     "screenshot": "https://tenaq.app/mockup.png",
     "featureList": [
       "Energy pattern tracking",
-      "Willpower measurement",
+      "Energy pattern analysis",
       "Personalized insights",
       "iPhone and Apple Watch integration"
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "1",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
+    ]
   }
   </script>
 
@@ -83,760 +76,14 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    
-    :root{
-      /* Premium scientific palette */
-      --primary-blue: #1e40af;
-      --electric-blue: #3b82f6;
-      --charcoal: #374151;
-      --clinical-green: #059669;
-      --warm-gray: #6b7280;
-      --light-gray: #f3f4f6;
-      --bg-white: #ffffff;
-      --border: #e5e7eb;
-      
-      /* Shadows */
-      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-      --radius: 12px;
-      --max: 1140px;
-    }
-    
-    * { box-sizing: border-box; }
-    
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg-white);
-      color: var(--charcoal);
-      font: 400 16px/1.6 'Inter', -apple-system, system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    
-    /* Typography */
-    h1, h2, h3 { 
-      font-weight: 700; 
-      letter-spacing: -0.02em;
-      color: var(--charcoal);
-    }
-    h1 { 
-      font-size: clamp(36px, 5vw, 56px); 
-      line-height: 1.1; 
-      margin: 0 0 20px;
-    }
-    h2 { 
-      font-size: clamp(28px, 4vw, 40px); 
-      line-height: 1.2; 
-      margin: 0 0 16px;
-    }
-    h3 { 
-      font-size: 20px; 
-      line-height: 1.3; 
-      margin: 0 0 8px;
-    }
-    
-    .mono { 
-      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace; 
-    }
-    
-    a { 
-      color: var(--primary-blue); 
-      text-decoration: none; 
-    }
-    a:hover { 
-      text-decoration: underline; 
-    }
-    
-    /* Layout */
-    .wrap {
-      max-width: var(--max);
-      margin-inline: auto;
-      padding: 8px;
-    }
-    
-    /* Header */
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 20;
-    }
-    
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 0;
-    }
-    
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--charcoal);
-    }
-    
-    .logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-    }
-    
-    /* Buttons */
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 24px;
-      border-radius: var(--radius);
-      background: var(--primary-blue);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: var(--shadow);
-    }
-    
-    .cta:hover {
-      background: #1e3a8a;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-lg);
-      text-decoration: none;
-    }
-    
-    .cta.secondary {
-      background: white;
-      color: var(--primary-blue);
-      border: 2px solid var(--primary-blue);
-      box-shadow: none;
-    }
-    
-    .cta.secondary:hover {
-      background: var(--light-gray);
-    }
-    
-    /* Hero */
-    .hero { 
-      padding: 80px 0 60px; 
-    }
-    
-    .hero-grid {
-      display: grid;
-      gap: 60px;
-      align-items: center;
-    }
-    
-    @media(min-width: 900px) {
-      .hero-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    
-    /* Cards */
-    .card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .card.elevated {
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .card-content {
-      padding: 24px;
-    }
-    
-    /* Eyebrow text */
-    .eyebrow {
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--warm-gray);
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    
-    .subtitle {
-      font-size: clamp(18px, 2.5vw, 22px);
-      color: var(--warm-gray);
-      margin: 0 0 32px;
-      line-height: 1.5;
-    }
-    
-    /* Badges */
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 24px 0;
-    }
-    
-    .badge {
-      font-size: 13px;
-      padding: 8px 14px;
-      border-radius: 24px;
-      background: var(--light-gray);
-      color: var(--charcoal);
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .badge.primary {
-      background: rgba(30, 64, 175, 0.1);
-      color: var(--primary-blue);
-    }
-    
-    .badge.success {
-      background: rgba(5, 150, 105, 0.1);
-      color: var(--clinical-green);
-    }
-    
-    /* Form */
-    .email-form {
-      display: flex;
-      gap: 12px;
-      margin: 32px 0 16px;
-    }
-    
-    .email-input {
-      flex: 1;
-      padding: 14px 18px;
-      border-radius: var(--radius);
-      border: 2px solid var(--border);
-      background: white;
-      color: var(--charcoal);
-      font-size: 16px;
-      transition: all 0.2s;
-    }
-    
-    .email-input:focus {
-      outline: none;
-      border-color: var(--electric-blue);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-    
-    .hint {
-      font-size: 14px;
-      color: var(--warm-gray);
-      margin-bottom: 20px;
-    }
-    
-    /* iPhone Mockup Placeholder */
-    .iphone-mockup {
-      position: relative;
-      max-width: 360px;
-      margin: 0 auto;
-      aspect-ratio: 390/844;
-      background: linear-gradient(145deg, #f9fafb, #ffffff);
-      border-radius: 40px;
-      box-shadow: 
-        0 30px 60px -12px rgb(0 0 0 / 0.25),
-        0 18px 36px -18px rgb(0 0 0 / 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 12px solid #1a1a1a;
-    }
-    
-    /* Responsive Mockup Container */
-    .mockup-container {
-      position: relative;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .mockup-image {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    
-    .mockup-placeholder {
-      text-align: center;
-      color: var(--warm-gray);
-      padding: 20px;
-    }
-    
-    /* Feature sections */
-    section {
-      padding: 60px 0;
-    }
-    
-    section.gray {
-      background: var(--light-gray);
-    }
-    
-    .feature-grid {
-      display: grid;
-      gap: 24px;
-      margin-top: 40px;
-    }
-    
-    @media(min-width: 768px) {
-      .feature-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    .feature-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 24px;
-      border: 1px solid var(--border);
-      transition: all 0.2s;
-    }
-    
-    .feature-card:hover {
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
-    }
-    
-    .stat {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--primary-blue);
-      margin-bottom: 8px;
-    }
-    
-    .stat-label {
-      font-size: 14px;
-      color: var(--warm-gray);
-    }
-    
-    /* How it works */
-    .steps-visual {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      gap: 24px;
-      align-items: center;
-      margin-top: 48px;
-    }
-
-    .step-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .step-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .step-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 20px;
-      background: rgba(30, 64, 175, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: var(--primary-blue);
-    }
-
-    .step-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--charcoal);
-      margin: 0 0 12px;
-    }
-
-    .step-description {
-      font-size: 14px;
-      color: var(--warm-gray);
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .step-arrow {
-      font-size: 24px;
-      color: var(--primary-blue);
-      font-weight: 300;
-    }
-
-    .steps-example {
-      margin-top: 48px;
-      text-align: center;
-    }
-
-    .example-card {
-      background: rgba(30, 64, 175, 0.05);
-      border: 1px solid rgba(30, 64, 175, 0.2);
-      border-radius: var(--radius);
-      padding: 24px;
-      max-width: 600px;
-      margin: 24px auto 0;
-    }
-
-    .example-label {
-      font-size: 14px;
-      color: var(--primary-blue);
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .example-text {
-      font-size: 16px;
-      color: var(--charcoal);
-      font-style: italic;
-    }
-
-    @media(max-width: 768px) {
-      .steps-visual {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .step-arrow {
-        display: none;
-      }
-
-      .step-card {
-        padding: 24px 20px;
-      }
-
-      .step-icon {
-        width: 56px;
-        height: 56px;
-        font-size: 24px;
-      }
-    }
-    
-    /* Testimonials */
-    .testimonial {
-      background: white;
-      border-radius: var(--radius);
-      padding: 24px;
-      border: 1px solid var(--border);
-    }
-    
-    .testimonial-text {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 16px;
-      color: var(--charcoal);
-    }
-    
-    .testimonial-author {
-      font-size: 14px;
-      color: var(--warm-gray);
-    }
-    
-    /* FAQ */
-    .faq-grid {
-      display: grid;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    details {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--charcoal);
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary::after {
-      content: '+';
-      font-size: 20px;
-      font-weight: 300;
-      color: var(--warm-gray);
-      transition: transform 0.3s ease;
-    }
-
-    details[open] summary::after {
-      transform: rotate(45deg);
-    }
-
-    details[open] summary {
-      margin-bottom: 12px;
-    }
-
-    details p {
-      margin: 0;
-      padding-top: 0;
-      opacity: 0;
-      max-height: 0;
-      transition: opacity 0.3s ease, max-height 0.3s ease, padding-top 0.3s ease;
-    }
-
-    details[open] p {
-      opacity: 1;
-      max-height: 200px;
-      padding-top: 4px;
-    }
-    
-    /* Footer */
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      background: var(--light-gray);
-    }
-    
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      color: var(--warm-gray);
-      font-size: 14px;
-    }
-    
-    /* Success Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .modal-overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .modal-content {
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      max-width: 480px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-    
-    .modal-overlay.show .modal-content {
-      transform: scale(1);
-    }
-    
-    .modal-content h2 {
-      font-size: 48px;
-      font-weight: 700;
-      color: var(--charcoal);
-      margin: 0 0 20px;
-    }
-    
-    .modal-subtitle {
-      font-size: 20px;
-      color: var(--warm-gray);
-      margin: 0 0 32px;
-      line-height: 1.5;
-    }
-    
-    .modal-timeline h3 {
-      font-size: 18px;
-      color: var(--charcoal);
-      margin: 0 0 16px;
-      text-align: left;
-    }
-    
-    .modal-timeline ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 32px;
-      text-align: left;
-    }
-    
-    .modal-timeline li {
-      padding: 8px 0;
-      color: var(--warm-gray);
-      font-size: 16px;
-      position: relative;
-      padding-left: 20px;
-    }
-    
-    .modal-timeline li:before {
-      content: "•";
-      color: var(--primary-blue);
-      position: absolute;
-      left: 0;
-      font-weight: bold;
-    }
-    
-    .modal-close-btn {
-      background: #4ade80;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 16px 32px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      min-width: 120px;
-    }
-    
-    .modal-close-btn:hover {
-      background: #22c55e;
-      transform: translateY(-1px);
-    }
-
-    /* Utilities */
-    .text-center { text-align: center; }
-    .mt-4 { margin-top: 32px; }
-    .mb-4 { margin-bottom: 32px; }
-    .sr-only { position: absolute; left: -9999px; }
-    
-    /* Responsive */
-    @media(max-width: 768px) {
-      .email-form {
-        flex-direction: column;
-      }
-
-      .hero {
-        padding: 40px 0;
-      }
-
-      section {
-        padding: 40px 0;
-      }
-
-      #how-it-works {
-        padding-top: 20px;
-      }
-
-      .mockup-container {
-        max-width: 500px;
-        margin: 20px auto;
-      }
-
-      .hero-grid {
-        gap: 40px;
-      }
-
-      .nav {
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px 0;
-      }
-
-      .nav div:last-child .badge {
-        display: none;
-      }
-
-      .nav .cta {
-        padding: 8px 12px;
-        font-size: 12px;
-        font-weight: 600;
-      }
-    }
-
-    /* Extra small screens (phones) */
-    @media(max-width: 480px) {
-      .wrap {
-        padding: 8px;
-      }
-
-      .nav {
-        padding: 8px 0;
-        gap: 12px;
-      }
-
-      .brand {
-        font-size: 18px;
-        gap: 8px;
-      }
-
-      .logo {
-        width: 28px;
-        height: 28px;
-      }
-
-      .nav .badge {
-        font-size: 10px;
-        padding: 3px 6px;
-      }
-
-      .nav .cta {
-        padding: 6px 12px;
-        font-size: 12px;
-      }
-
-      /* Mobile hero optimizations */
-      .hero {
-        padding: 24px 0;
-      }
-
-      .hero h1 {
-        font-size: 32px;
-        margin-bottom: 16px;
-      }
-
-      .hero .subtitle {
-        font-size: 18px;
-        margin-bottom: 20px;
-      }
-
-      .badge-row {
-        margin: 16px 0;
-      }
-
-      .badge {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
-    }
-
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <div class="wrap">
       <nav class="nav">
         <div class="brand">
-          <img src="appIcon.png" alt="TenaQ Logo" class="logo">
+          <img src="appIcon.png" alt="TenaQ app icon featuring a minimalist brain design in blue" class="logo">
           <span>TenaQ</span>
         </div>
         <div style="display: flex; gap: 12px; align-items: center;">
@@ -893,7 +140,7 @@
 
           <!-- iPhone Mockup Placeholder -->
           <div class="mockup-container">
-            <img src="mockup.png" alt="TenaQ app showing daily willpower graph and energy patterns" class="mockup-image">
+            <img src="mockup.png" alt="iPhone displaying TenaQ app interface with daily energy pattern tracking graph, energy level indicators, and personalized insights for optimizing mental performance throughout the day" class="mockup-image">
 
             <!-- Badges below mockup -->
             <div class="badge-row" style="justify-content: center; margin-top: 24px;">
@@ -944,7 +191,7 @@
             </div>
 
             <div style="text-align: center; margin: 48px 0;">
-              <img src="tenaq-infographic.svg" alt="TenaQ How It Works Infographic" style="max-width: 100%; height: auto;" />
+              <img src="tenaq-infographic.svg" alt="Step-by-step infographic showing TenaQ's three-phase process: quick energy check-ins on mobile device, AI-powered pattern detection analyzing daily energy fluctuations, and personalized recommendations for optimizing work schedule" style="max-width: 100%; height: auto;" />
             </div>
 
             <!-- Notification Showcase Section -->
@@ -954,7 +201,7 @@
                 <p style="font-size: 14px; color: var(--warm-gray); margin: 0;">Get personalized energy insights right when you need them</p>
               </div>
               <div style="text-align: center;">
-                <img src="notification.png" alt="TenaQ insight notification preview" style="max-width: 70%; height: auto;" />
+                <img src="notification.png" alt="iOS notification from TenaQ showing personalized energy insight recommendation: 'Your energy peaks at 10am - schedule important tasks then' with app icon and actionable timing advice" style="max-width: 70%; height: auto;" />
               </div>
             </div>
           </div>
@@ -1012,7 +259,7 @@
               <summary>How is this different from time tracking apps?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
                 Time trackers show WHEN you work. TenaQ shows when you SHOULD work. 
-                We measure your mental energy and willpower capacity, not just hours logged.
+                We measure your mental energy and capacity patterns, not just hours logged.
               </p>
             </details>
             
@@ -1027,7 +274,7 @@
             <details>
               <summary>What's this aMCC thing?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
-                The anterior mid-cingulate cortex is the brain region that governs willpower and effort.
+                The anterior mid-cingulate cortex is the brain region that governs mental energy and effort.
                 Recent Stanford research shows it can be trained. TenaQ is the first app to apply this science practically.
               </p>
             </details>
@@ -1035,7 +282,7 @@
             <details>
               <summary>When does the beta launch?</summary>
               <p style="color: var(--warm-gray); margin: 0;">
-                TestFlight opens January 2026. Beta users get exclusive early access
+                TestFlight opens Early November 2025. Beta users get exclusive early access
                 and help shape the final product. Limited to 100 beta testers.
               </p>
             </details>
@@ -1097,7 +344,7 @@
       <h3>What happens next:</h3>
       <ul>
         <li><strong>November 2025:</strong> TestFlight beta invites (limited spots)</li>
-        <li><strong>Week 1:</strong> Your first willpower pattern insights</li>
+        <li><strong>Week 1:</strong> Your first energy pattern insights</li>
         <li><strong>Beta exclusive:</strong> Help shape the final product</li>
       </ul>
     </div>
@@ -1112,7 +359,7 @@
     <div class="wrap">
       <div class="footer-content">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <img src="appIcon.png" alt="TenaQ Logo" class="logo">
+          <img src="appIcon.png" alt="TenaQ app icon featuring a minimalist brain design in blue" class="logo">
           <span>© 2025 TenaQ • Built by a solo iOS dev who got tired of afternoon crashes</span>
         </div>
         <div style="display: flex; gap: 20px;">
