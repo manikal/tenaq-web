@@ -637,6 +637,54 @@ footer {
   transform: translateY(-1px);
 }
 
+/* Smart Insights Section */
+.smart-insights-container {
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(59, 130, 246, 0.1) 100%);
+  border-radius: 20px;
+  padding: 0 24px 48px;
+  margin-top: 64px;
+  border: 1px solid rgba(30, 64, 175, 0.1);
+  text-align: center;
+}
+
+.smart-insights-image {
+  margin-bottom: 24px;
+}
+
+.smart-insights-image img {
+  max-width: 70%;
+  height: auto;
+}
+
+.smart-insights-content h3 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin: 0 0 8px;
+}
+
+.smart-insights-content p {
+  font-size: 18px;
+  color: var(--warm-gray);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .smart-insights-container {
+    padding: 0 16px 32px;
+    margin-top: 48px;
+  }
+
+  .smart-insights-image {
+    margin-bottom: 20px;
+  }
+
+  .smart-insights-image img {
+    max-width: 80%;
+  }
+}
+
 /* Utilities */
 .text-center { text-align: center; }
 .mt-4 { margin-top: 32px; }

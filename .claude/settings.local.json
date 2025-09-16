@@ -10,7 +10,8 @@
       "Bash(npm uninstall:*)",
       "Bash(npm install:*)",
       "Bash(grep:*)",
-      "Bash(sips:*)"
+      "Bash(sips:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
