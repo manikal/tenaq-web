@@ -89,6 +89,13 @@ header {
   padding: 0;
 }
 
+/* Desktop navigation padding */
+@media(min-width: 769px) {
+  .nav {
+    padding: 16px 0;
+  }
+}
+
 .brand {
   display: flex;
   align-items: center;
